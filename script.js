@@ -194,20 +194,48 @@ guestOption.addEventListener("click", () => {
   hideModal(); // Close the modal
 });
 
-// Show the modal when you need to
-function showLoginModal() {
-  const modal = document.querySelector('.login-modal');
-  modal.classList.add('active');
+// Cookie Consent Handling
+const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+
+// If cookies are not accepted, show the cookie consent prompt
+if (!cookiesAccepted) {
+  window.addEventListener('load', () => {
+    // Show whiteout effect
+    document.getElementById('whiteout').style.display = 'block';
+    
+    // Delay the appearance of the cookie consent popup
+    setTimeout(() => {
+      document.getElementById('cookieConsent').classList.add('visible');
+      document.getElementById('whiteout').style.opacity = 0; // Fade out the whiteout
+    }, 1000); // Wait 1 second before showing the cookie consent
+  });
 }
 
-// Hide the modal when an option is picked
-function hideLoginModal() {
-  const modal = document.querySelector('.login-modal');
-  modal.classList.remove('active');
-}
+// If the user accepts cookies
+document.getElementById('acceptCookies').addEventListener('click', () => {
+  // Store the user's choice in localStorage
+  localStorage.setItem('cookiesAccepted', 'true');
+  
+  // Hide the cookie consent and whiteout
+  document.getElementById('cookieConsent').classList.remove('visible');
+  document.getElementById('whiteout').style.display = 'none';
+  
+  // Redirect to the home page (or any other URL)
+  window.location.href = '/'; // '/' for home page, or specify another URL
+});
 
-// Example of showing the modal when a button is clicked
-document.querySelector('.some-button').addEventListener('click', showLoginModal); 
+// If the user declines cookies
+document.getElementById('declineCookies').addEventListener('click', () => {
+  // Store the user's choice in localStorage (not accepting cookies)
+  localStorage.setItem('cookiesAccepted', 'false');
+  
+  // Hide the cookie consent and whiteout
+  document.getElementById('cookieConsent').classList.remove('visible');
+  document.getElementById('whiteout').style.display = 'none';
+  
+  // Redirect to the home page (or any other URL)
+  window.location.href = '/'; // '/' for home page, or specify another URL
+});
 
 // Tawk.to Chat Integration (moved to end of script)
 const script = document.createElement("script");
