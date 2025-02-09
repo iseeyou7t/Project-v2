@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taha Barakat | Big T</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Notice Banner -->
+    <div id="notice-banner">
+        <span id="close-banner" style="cursor: pointer;">&times;</span>
+        ⚠️ Warning! Any attempts to breach website security or use harmful technology will be detected and are subject to legal action. ⚖️
+        <a href="https://docs.google.com/document/d/1d2LzuQuK5aeOZtxzuMUKyF4z6TIUSbbcHGexqVSiqDo/edit?tab=t.0" target="_blank">Website Policy & Rules</a>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Switch to Dark Mode">🌙</button>
+
+    <!-- Header with Navigation -->
+    <header>
+        <h1 class="glitch-text">Taha Barakat | My Way</h1>
+        <nav id="navbar">
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Login Section at the top -->
+    <div class="login-container">
+        <button id="login-btn">Login</button>
+        <button id="signup-btn">Sign Up</button>
+        <button id="guest-btn">Continue as Guest</button>
+    </div>
+
+    <!-- Modal for login/signup/guest -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <h2>Choose an option</h2>
+            <button id="login">Login</button>
+            <button id="signup">Sign Up</button>
+            <button id="guest">Continue as Guest</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="scroll-animation">
+        <h2 id="typewriter"></h2>
+        <p>Discover my journey, projects, and passion for web development.</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="scroll-animation">
+        <h2>About Me</h2>
+        <p>
+            Hello! My name is Taha Barakat, I am a highly motivated individual with a passion for creative problem-solving and a strong drive for continuous learning. I excel in detail-oriented work and thrive in collaborative environments. My experience in web design, programming, and other related fields has sharpened my ability to deliver high-quality results while maintaining a positive and professional approach.
+        </p>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="scroll-animation">
+        <h2>My Work</h2>
+        <div class="portfolio">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Project 1" class="portfolio-img">
+                    </div>
+                    <div class="flip-card-back">
+                        <p>Project 1 Details</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Project 2" class="portfolio-img">
+                    </div>
+                    <div class="flip-card-back">
+                        <p>Project 2 Details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="scroll-animation">
+        <h2>Contact Me</h2>
+        <form action="https://formspree.io/f/movvvbpe" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="glow-button">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Taha Barakat. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Canvas for Particle Effects -->
+    <canvas id="particleCanvas"></canvas>
+    <canvas id="snowCanvas"></canvas>
+
+    <!-- Link to JS file -->
+    <script src="script.js"></script>
+
+</body>
+</html>
+
