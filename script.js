@@ -193,3 +193,12 @@ guestOption.addEventListener("click", () => {
   alert("Continuing as Guest.");
   hideModal(); // Close the modal
 });
+
+// Tawk.to Chat Integration
+const script = document.createElement("script");
+script.type = "text/javascript";
+script.async = true;
+script.src = "https://embed.tawk.to/67a82fa53a842732607c06b5/1ijkfk82c";
+script.charset = "UTF-8";
+script.setAttribute("crossorigin", "*");
+document.head.appendChild(script);
