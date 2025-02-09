@@ -56,14 +56,14 @@ document.addEventListener("DOMContentLoaded", triggerAnimations);
 
 // Click Limiter: Warning Instead of Redirection
 let clickCount = 0;
-const clickLimit = 5;
+const clickLimit = 40;
 
 document.body.addEventListener("click", () => {
   clickCount++;
   console.log(`Click count: ${clickCount}`);
 
   if (clickCount > clickLimit) {
-    alert("Warning: You're clicking too much! Chill out 😅");
+    alert("Warning: Why you clicking so much! contact support if you need help");
   }
 });
 
