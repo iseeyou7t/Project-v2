@@ -194,7 +194,22 @@ guestOption.addEventListener("click", () => {
   hideModal(); // Close the modal
 });
 
-// Tawk.to Chat Integration
+// Show the modal when you need to
+function showLoginModal() {
+  const modal = document.querySelector('.login-modal');
+  modal.classList.add('active');
+}
+
+// Hide the modal when an option is picked
+function hideLoginModal() {
+  const modal = document.querySelector('.login-modal');
+  modal.classList.remove('active');
+}
+
+// Example of showing the modal when a button is clicked
+document.querySelector('.some-button').addEventListener('click', showLoginModal); 
+
+// Tawk.to Chat Integration (moved to end of script)
 const script = document.createElement("script");
 script.type = "text/javascript";
 script.async = true;
@@ -202,3 +217,4 @@ script.src = "https://embed.tawk.to/67a82fa53a842732607c06b5/1ijkfk82c";
 script.charset = "UTF-8";
 script.setAttribute("crossorigin", "*");
 document.head.appendChild(script);
+
