@@ -48,13 +48,16 @@
         <button id="guest-btn">Continue as Guest</button>
     </div>
 
-    <!-- Modal for login/signup/guest -->
-    <div id="auth-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h2>Choose an option</h2>
-            <button id="login-option">Login</button>
-            <button id="signup-option">Sign Up</button>
-            <button id="guest-option">Continue as Guest</button>
+    <!-- Add this HTML code just before your closing </body> tag -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-container">
+            <h2>Welcome</h2>
+            <p>Please sign in or continue as a guest to explore the site.</p>
+            <div class="login-options">
+                <button id="signInBtn">Sign In</button>
+                <button id="signUpBtn">Sign Up</button>
+                <button id="guestBtn">Continue as Guest</button>
+            </div>
         </div>
     </div>
 
@@ -138,5 +141,4 @@
 
 </body>
 </html>
-
 
