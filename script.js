@@ -236,13 +236,3 @@ document.getElementById('declineCookies').addEventListener('click', () => {
   // Redirect to the home page (or any other URL)
   window.location.href = '/'; // '/' for home page, or specify another URL
 });
-
-// Tawk.to Chat Integration (moved to end of script)
-const script = document.createElement("script");
-script.type = "text/javascript";
-script.async = true;
-script.src = "https://embed.tawk.to/67a82fa53a842732607c06b5/1ijkfk82c";
-script.charset = "UTF-8";
-script.setAttribute("crossorigin", "*");
-document.head.appendChild(script);
-
