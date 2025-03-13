@@ -102,19 +102,7 @@ noscript div {
     color: white;
     font-family: Arial, sans-serif;
 }
-/* ... (your existing CSS) ... */
 
-#admin-login-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent */
-    cursor: pointer;
-    z-index: 9999;
-}
 /* Audio Styles */
 #backgroundMusic {
     width: 80%;
@@ -137,4 +125,50 @@ noscript div {
 
 #muteButton:hover {
     background-color: var(--secondary-color);
+}
+
+#admin-login-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 9999;
+}
+
+#help-form-container {
+    width: 80%; /* Adjust width as needed */
+    max-width: 600px; /* Adjust max-width as needed */
+    margin: 40px auto; /* Adjust margin as needed */
+    padding: 20px; /* Adjust padding as needed */
+    border: 1px solid #ccc; /* Adjust border as needed */
+    border-radius: 5px; /* Adjust border-radius as needed */
+    text-align: left;
+}
+
+#help-form-container label {
+    display: block;
+    margin-bottom: 10px; /* Adjust margin-bottom as needed */
+}
+
+#help-form-container input,
+#help-form-container textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px; /* Adjust margin-bottom as needed */
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+#help-form-container button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
