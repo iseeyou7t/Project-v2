@@ -6,17 +6,17 @@
 }
 
 :root {
-    --primary-color: #007bff; /* Blue */
-    --secondary-color: #ffc107; /* Orange */
-    --accent-color: #28a745; /* Green */
-    --light-bg: #f0f0f0; /* Light Gray */
+    --primary-color: #007bff;
+    --secondary-color: #ffc107;
+    --accent-color: #28a745;
+    --light-bg: #f0f0f0;
     --dark-bg: #333;
     --light-text: #333;
     --dark-text: #fff;
 }
 
 body {
-    font-family: 'Poppins', Arial, sans-serif; /* Fallback fonts */
+    font-family: 'Poppins', Arial, sans-serif;
     line-height: 1.6;
     color: var(--light-text);
     scroll-behavior: smooth;
@@ -66,13 +66,13 @@ body.dark-mode {
 
 /* Maintenance Mode */
 #maintenance-mode {
-    display: none; /* Initially hidden */
+    display: none;
     justify-content: center;
     align-items: center;
     height: 100vh;
     flex-direction: column;
     text-align: center;
-    background-color: #f0f0f0; /* Light gray background */
+    background-color: #f0f0f0;
     font-family: sans-serif;
 }
 
@@ -87,7 +87,7 @@ body.dark-mode {
 
 /* Main Content */
 #main-content {
-    /* Add styles for your main content here */
+    /* Add styles for your main content here (if needed) */
 }
 
 /* Styles for noscript */
@@ -97,6 +97,11 @@ noscript div {
     align-items: center;
     height: 100vh;
     flex-direction: column;
+    text-align: center;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+}
     text-align: center;
     background: black;
     color: white;
