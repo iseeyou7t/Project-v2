@@ -1,15 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Maintenance Mode
-    const isUnderMaintenance = true; // Change to false when the site is live
+    const isUnderMaintenance = true;
     const maintenanceDiv = document.getElementById("maintenance-mode");
     const mainContent = document.getElementById("main-content");
 
-    // Simulate fetching the user's IP address (replace this with actual logic if using a backend)
-    const userIp = "184.145.64.203"; // Example user IP (replace this with dynamic fetching)
-    const adminIp = "184.145.64.203"; // Example admin IP (this should be the IP of the admin)
-
-    // Check if the user is an admin (has the same IP as the admin IP)
-    if (isUnderMaintenance && userIp !== adminIp) {
+    if (isUnderMaintenance) {
         if (maintenanceDiv) {
             maintenanceDiv.style.display = "flex";
         }
@@ -17,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
             mainContent.style.display = "none";
         }
     } else {
-        // Allow admin to see the content
         if (maintenanceDiv) {
             maintenanceDiv.style.display = "none";
         }
@@ -25,4 +18,28 @@ document.addEventListener("DOMContentLoaded", () => {
             mainContent.style.display = "block";
         }
     }
+
+    // Theme Toggle
+    const themeToggleBtn = document.querySelector('.theme-toggle-btn');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    }
+
+    // Scroll Animation
+    const scrollAnimations = document.querySelectorAll('.scroll-animation');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+
+    scrollAnimations.forEach(animation => {
+        observer.observe(animation);
+    });
 });
