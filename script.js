@@ -119,4 +119,27 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // Admin Login Button
+    const adminLoginButton = document.getElementById("admin-login-button");
+    if (adminLoginButton) {
+        adminLoginButton.addEventListener("click", () => {
+            // Insecure: Sets a cookie to indicate admin status
+            document.cookie = "isAdmin=true; path=/";
+            alert("Admin login successful. Refresh the page.");
+        });
+    }
+
+    // Check Admin Status (Example)
+    const isAdmin = document.cookie.split('; ').find(row => row.startsWith('isAdmin='));
+    if (isAdmin && isAdmin.split('=')[1] === 'true') {
+        // Allow admin access
+        isUnderMaintenance = false;
+        if (maintenanceDiv) {
+            maintenanceDiv.style.display = "none";
+        }
+        if (mainContent) {
+            mainContent.style.display = "block";
+        }
+    }
 });
