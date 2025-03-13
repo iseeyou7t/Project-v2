@@ -1,294 +1,104 @@
 /* General Reset */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
-  --primary-color: #007bff; /* Blue */
-  --secondary-color: #ffc107; /* Orange */
-  --accent-color: #28a745; /* Green */
-  --light-bg: #f0f0f0; /* Light Gray */
-  --dark-bg: #333;
-  --light-text: #333;
-  --dark-text: #fff;
+    --primary-color: #007bff; /* Blue */
+    --secondary-color: #ffc107; /* Orange */
+    --accent-color: #28a745; /* Green */
+    --light-bg: #f0f0f0; /* Light Gray */
+    --dark-bg: #333;
+    --light-text: #333;
+    --dark-text: #fff;
 }
 
 body {
-  font-family: 'Poppins', Arial, sans-serif; /* Fallback fonts */
-  line-height: 1.6;
-  color: var(--light-text);
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  transition: all 0.3s ease;
-  background-color: var(--light-bg);
-  background-image: url("path/to/your/background-image.jpg"); /* Replace with your image path */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+    font-family: 'Poppins', Arial, sans-serif; /* Fallback fonts */
+    line-height: 1.6;
+    color: var(--light-text);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+    background-color: var(--light-bg);
 }
 
 body.dark-mode {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-/* Hide Navbar when Modal is Active */
-body.modal-active #navbar {
-  display: none;
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
 }
 
 /* Theme Toggle Button */
 .theme-toggle-btn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #555;
-  border: 2px solid #fff;
-  color: #fff;
-  padding: 10px;
-  border-radius: 50%;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #555;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .theme-toggle-btn:hover {
-  transform: rotate(360deg) scale(1.1);
-  background-color: #0078d4;
-}
-
-/* Login Modal Style */
-.login-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Darkened background overlay */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  visibility: hidden; /* Initially hidden */
-  opacity: 0;
-  transition: visibility 0s, opacity 0.3s ease; /* Smooth transition */
-}
-
-.login-modal.active {
-  visibility: visible; /* Make it visible when active */
-  opacity: 1; /* Smooth fade-in effect */
-}
-
-.login-container {
-  background-color: #fff; /* White background */
-  padding: 3rem;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-  max-width: 400px;
-  width: 100%;
-}
-
-.login-container h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.login-container p {
-  margin-bottom: 2rem;
-  font-size: 1rem;
-}
-
-.login-options button {
-  background-color: var(--primary-color);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 0.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-.login-options button:hover {
-  background-color: var(--secondary-color);
-}
-
-/* Header */
-header {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  padding: 3rem 2rem;
-  text-align: center;
-  color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header.dark-mode {
-  background: linear-gradient(135deg, #333, #444);
-}
-
-/* Navbar */
-#navbar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  border-left: 2px solid var(--secondary-color); /* Border around navbar */
-}
-
-#navbar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#navbar li {
-  margin: 1rem 0;
-}
-
-#navbar a {
-  color: var(--light-text);
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-#navbar a:hover {
-  color: var(--primary-color);
-}
-
-/* About Section */
-#about {
-  background-color: var(--light-bg);
-  padding: 2rem;
-  margin-bottom: 1rem;
-}
-
-body.dark-mode #about {
-  background-color: var(--dark-bg); /* Dark background in dark mode */
-  color: var(--dark-text); /* Light text in dark mode */
-}
-
-/* Portfolio Section */
-#portfolio {
-  padding: 3rem 2rem;
-  margin-bottom: 2rem;
-}
-
-/* Contact Section */
-#contact {
-  padding: 3rem 2rem;
-  margin-top: 4rem;
-  background-color: var(--light-bg);
-  color: var(--light-text);
-}
-
-/* Contact section in dark mode */
-body.dark-mode #contact {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-/* Adjust for images in the portfolio */
-.portfolio-img {
-  margin: 1rem;
-  border-radius: 10px;
-  max-width: 100%;
-  height: auto;
+    transform: rotate(360deg) scale(1.1);
+    background-color: #0078d4;
 }
 
 /* Scroll-triggered animations */
 .scroll-animation {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .scroll-animation.visible {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Maintenance Mode */
-.maintenance-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent dark overlay */
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 9999;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity 0.3s ease;
-}
-
-.maintenance-overlay.active {
-  visibility: visible;
-  opacity: 1;
-}
-
-.maintenance-message {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.maintenance-btn {
-  padding: 10px 20px;
-  background-color: var(--primary-color);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-.maintenance-btn:hover {
-  background-color: var(--secondary-color);
-}
-
-/* Ensure mobile responsiveness */
-@media (max-width: 768px) {
-  section {
-      padding: 2rem 1rem;
-  }
-
-  form {
-      padding: 1.5rem;
-  }
-
-  .portfolio-img {
-      max-width: 100%;
-  }
-
-  #navbar {
-    flex-direction: row;
-    border-left: none;
-    border-top: 2px solid var(--secondary-color);
-    width: 100%;
+#maintenance-mode {
+    display: none; /* Initially hidden */
     justify-content: center;
-  }
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+    background-color: #f0f0f0; /* Light gray background */
+    font-family: sans-serif;
+}
 
-  #navbar li {
-    margin: 0 1rem;
-  }
+#maintenance-mode h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#maintenance-mode p {
+    color: #666;
+}
+
+/* Main Content */
+#main-content {
+    /* Add styles for your main content here */
+}
+
+/* Styles for noscript */
+noscript div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
 }
