@@ -241,6 +241,52 @@ form {
   transform: translateY(0);
 }
 
+/* Maintenance Mode */
+.maintenance-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent dark overlay */
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  visibility: hidden; /* Hidden by default */
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease;
+}
+
+.maintenance-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.maintenance-message {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.maintenance-btn {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.maintenance-btn:hover {
+  background-color: var(--secondary-color);
+}
+
 /* Ensure mobile responsiveness */
 @media (max-width: 768px) {
   section {
