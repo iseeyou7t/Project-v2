@@ -16,7 +16,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', Arial, sans-serif; /* Fallback fonts */
   line-height: 1.6;
   color: var(--light-text);
   scroll-behavior: smooth;
@@ -134,7 +134,11 @@ header {
   align-items: center;
 }
 
-/* Move the navbar to the right and add a border */
+header.dark-mode {
+  background: linear-gradient(135deg, #333, #444);
+}
+
+/* Navbar */
 #navbar {
   display: flex;
   flex-direction: column;
@@ -167,11 +171,10 @@ header {
 /* About Section */
 #about {
   background-color: var(--light-bg);
-  padding: 2rem; /* Reduced padding */
-  margin-bottom: 1rem; /* Adjusted bottom margin */
+  padding: 2rem;
+  margin-bottom: 1rem;
 }
 
-/* About section in dark mode */
 body.dark-mode #about {
   background-color: var(--dark-bg); /* Dark background in dark mode */
   color: var(--dark-text); /* Light text in dark mode */
@@ -189,18 +192,12 @@ body.dark-mode #about {
   margin-top: 4rem;
   background-color: var(--light-bg);
   color: var(--light-text);
-  /* Ensure text is light in the default light mode */
 }
 
 /* Contact section in dark mode */
 body.dark-mode #contact {
-  background-color: var(--dark-bg); /* Dark background in dark mode */
-  color: var(--dark-text); /* Light text in dark mode */
-}
-
-/* Contact Title in dark mode */
-body.dark-mode #contact h2 {
-  color: var(--dark-text); /* Make contact title white in dark mode */
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
 }
 
 /* Adjust for images in the portfolio */
@@ -209,24 +206,6 @@ body.dark-mode #contact h2 {
   border-radius: 10px;
   max-width: 100%;
   height: auto;
-}
-
-/* Adjust About text padding */
-.about {
-  padding: 1rem;
-}
-
-/* Contact Form */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: var(--light-bg);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Scroll-triggered animations */
@@ -255,7 +234,7 @@ form {
   align-items: center;
   flex-direction: column;
   z-index: 9999;
-  visibility: hidden; /* Hidden by default */
+  visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.3s ease;
 }
@@ -301,7 +280,6 @@ form {
       max-width: 100%;
   }
 
-  /* Make navbar horizontal in smaller screens */
   #navbar {
     flex-direction: row;
     border-left: none;
