@@ -17,8 +17,7 @@
         <div>
             <h1>🚧 Website Under Maintenance 🚧</h1>
             <p>Admin only mode. Contact staff.</p>
-        </div>
-    </noscript>
+        </noscript>
 
     <div id="main-content" class="scroll-animation">
         <p>This is the main content of the website.</p>
@@ -33,6 +32,22 @@
         <button id="muteButton">Mute</button>
         <input type="text" id="myInput">
         <div id="admin-login-button"></div>
+
+        <div id="help-form-container">
+            <h2>Need Help?</h2>
+            <form action="https://formspree.io/f/mqapkojv" method="POST">
+                <label>
+                    Your email:
+                    <input type="email" name="email">
+                </label>
+                <label>
+                    Your message:
+                    <textarea name="message"></textarea>
+                </label>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <div style="height: 2000px;"></div>
     </div>
 
     <script src="script.js"></script>
