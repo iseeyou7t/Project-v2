@@ -102,7 +102,19 @@ noscript div {
     color: white;
     font-family: Arial, sans-serif;
 }
+/* ... (your existing CSS) ... */
 
+#admin-login-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent */
+    cursor: pointer;
+    z-index: 9999;
+}
 /* Audio Styles */
 #backgroundMusic {
     width: 80%;
