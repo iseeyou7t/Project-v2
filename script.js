@@ -69,14 +69,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 1000); // Reset count after 1 second
         }
         if (clickCount > 10) { // Threshold
-            console.warn("Excessive clicks detected.");
-            // Optionally disable interactive elements
+            alert("Excessive clicks detected. You have been kicked.");
+            window.location.href = "about:blank"; // Kick the user
         }
     });
 
     // Right-Click Disabling
     document.addEventListener('contextmenu', (e) => {
         e.preventDefault();
+        alert("Right-click disabled. You have been kicked.");
+        window.location.href = "about:blank";
     });
 
     // Keylogging Detection (Limited)
@@ -84,20 +86,26 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('keydown', () => {
         keyPressCount++;
         if (keyPressCount > 50) {
-            console.warn("High key press count");
+            alert("High key press count. You have been kicked.");
+            window.location.href = "about:blank";
         }
     });
 
     // Copy/Paste Disabling
     document.addEventListener('copy', (e) => {
         e.preventDefault();
+        alert("Copying disabled. You have been kicked.");
+        window.location.href = "about:blank";
     });
     document.addEventListener('paste', (e) => {
         e.preventDefault();
+        alert("Pasting disabled. You have been kicked.");
+        window.location.href = "about:blank";
     });
 
     // Frame Busting (Partial)
     if (window.top !== window.self) {
+        alert("Frame busting detected. You have been kicked.");
         window.top.location = window.self.location;
     }
 
@@ -106,7 +114,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (myInput) {
         myInput.addEventListener('input', (event) => {
             if (event.target.value.length > 500) {
-                console.warn("Long input detected");
+                alert("Long input detected. You have been kicked.");
+                window.location.href = "about:blank";
             }
         });
     }
