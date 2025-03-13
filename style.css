@@ -87,7 +87,7 @@ body.dark-mode {
 
 /* Main Content */
 #main-content {
-    /* Add styles for your main content here (if needed) */
+    text-align: center;
 }
 
 /* Styles for noscript */
@@ -102,8 +102,27 @@ noscript div {
     color: white;
     font-family: Arial, sans-serif;
 }
-    text-align: center;
-    background: black;
-    color: white;
-    font-family: Arial, sans-serif;
+
+/* Audio Styles */
+#backgroundMusic {
+    width: 80%;
+    max-width: 400px;
+    margin: 20px auto;
+    display: block;
+}
+
+#muteButton {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+#muteButton:hover {
+    background-color: var(--secondary-color);
 }
