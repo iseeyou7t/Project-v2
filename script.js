@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isUnderMaintenance) {
         if (maintenanceDiv) {
             maintenanceDiv.style.display = "flex";
+            // Update the maintenance message here:
+            const maintenanceMessage = maintenanceDiv.querySelector("p");
+            if(maintenanceMessage){
+              maintenanceMessage.textContent = "Admin only mode. Contact staff.";
+            }
+
         }
         if (mainContent) {
             mainContent.style.display = "none";
