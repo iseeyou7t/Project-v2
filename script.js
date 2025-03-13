@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isUnderMaintenance) {
         if (maintenanceDiv) {
             maintenanceDiv.style.display = "flex";
-            // Update the maintenance message here:
             const maintenanceMessage = maintenanceDiv.querySelector("p");
             if(maintenanceMessage){
               maintenanceMessage.textContent = "Admin only mode. Contact staff.";
@@ -48,4 +47,16 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollAnimations.forEach(animation => {
         observer.observe(animation);
     });
+
+    // Audio Control
+    const audio = document.getElementById("backgroundMusic");
+    const muteButton = document.getElementById("muteButton");
+
+    if(audio && muteButton){
+        muteButton.addEventListener("click", () => {
+            audio.muted = !audio.muted;
+            muteButton.textContent = audio.muted ? "Unmute" : "Mute";
+        });
+    }
+
 });
