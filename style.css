@@ -220,4 +220,8 @@ noscript div {
 .login-form button {
     background-color: #28a745;
     color: white;
-    padding: 10
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
