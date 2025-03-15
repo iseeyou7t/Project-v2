@@ -175,30 +175,30 @@ noscript div {
 
 /* Login Button Styles */
 .login-container {
-    position: relative;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
 }
 
 .login-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     background-color: #007bff;
-    color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
 }
 
 .login-button:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .login-form {
     position: absolute;
-    top: 50px;
-    right: 10px;
+    top: 40px;
+    right: 0;
     background-color: white;
     padding: 20px;
     border: 1px solid #ccc;
@@ -220,8 +220,4 @@ noscript div {
 .login-form button {
     background-color: #28a745;
     color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
+    padding: 10
