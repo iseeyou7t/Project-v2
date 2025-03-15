@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const isUnderMaintenance = true;
+    let isUnderMaintenance = true; // Declare isUnderMaintenance with let
     const maintenanceDiv = document.getElementById("maintenance-mode");
     const mainContent = document.getElementById("main-content");
 
@@ -121,12 +121,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Admin Login Button
-    const adminLoginButton = document.getElementById("admin-login-button");
-    if (adminLoginButton) {
-        adminLoginButton.addEventListener("click", () => {
-            // Insecure: Sets a cookie to indicate admin status
-            document.cookie = "isAdmin=true; path=/";
-            alert("Admin login successful. Refresh the page.");
+    const loginButton = document.getElementById('loginButton');
+    const loginForm = document.getElementById('loginForm');
+
+    if (loginButton && loginForm) {
+        loginButton.addEventListener('click', () => {
+            if (loginForm.style.display === 'block') {
+                loginForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'block';
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!loginButton.contains(event.target) && !loginForm.contains(event.target)) {
+                loginForm.style.display = 'none';
+            }
         });
     }
 
