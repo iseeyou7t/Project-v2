@@ -17,13 +17,14 @@
         <div>
             <h1>🚧 Website Under Maintenance 🚧</h1>
             <p>Admin only mode. Contact Staff.</p>
-        </noscript>
+        </div>
+    </noscript>
 
     <div id="main-content" class="scroll-animation">
         <p>This is the main content of the website.</p>
         <button class="theme-toggle-btn">Toggle Theme</button>
         <div class="scroll-animation">
-          <p>This is a scroll animation element</p>
+            <p>This is a scroll animation element</p>
         </div>
         <audio id="backgroundMusic" loop autoplay>
             <source src="your-music-file.mp3" type="audio/mpeg">
@@ -31,7 +32,15 @@
         </audio>
         <button id="muteButton">Mute</button>
         <input type="text" id="myInput">
-        <div id="admin-login-button"></div>
+
+        <div class="login-container">
+            <button class="login-button" id="loginButton">Admin Login</button>
+            <div class="login-form" id="loginForm">
+                <input type="text" placeholder="Username">
+                <input type="password" placeholder="Password">
+                <button>Login</button>
+            </div>
+        </div>
 
         <div id="help-form-container">
             <h2>Need Help?</h2>
