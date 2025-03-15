@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    let isUnderMaintenance = true; // Declare isUnderMaintenance with let
+    let isUnderMaintenance = true;
     const maintenanceDiv = document.getElementById("maintenance-mode");
     const mainContent = document.getElementById("main-content");
 
@@ -148,6 +148,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (maintenanceDiv) {
             maintenanceDiv.style.display = "none";
         }
+        if (mainContent) {
+            mainContent.style.display = "block";
+        }
+    }
+});
         if (mainContent) {
             mainContent.style.display = "block";
         }
