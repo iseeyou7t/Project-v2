@@ -9,15 +9,25 @@ const autocompleteResults = document.getElementById('autocomplete-results');
 const mapContainer = document.querySelector('.map-container');
 const mapElement = document.getElementById('map');
 
+// Virus mode elements
+const virusToggle = document.getElementById('virus-toggle');
+const virusOverlay = document.getElementById('virus-overlay');
+const virusMessage = document.getElementById('virus-message');
+
 // Weather API Configuration
 const API_KEY = 'YOUR_OPENWEATHERMAP_API_KEY'; // REPLACE THIS
-const GEO_API_KEY = 'YOUR_MAPBOX_API_KEY'; // Get from Mapbox (free tier available)
+const GEO_API_KEY = 'YOUR_MAPBOX_API_KEY'; // REPLACE THIS
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const GEO_API_URL = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 
 // Initialize map
 let map;
 let marker;
+let virusMode = false;
+let virusInterval;
+let glitchInterval;
+let flickerInterval;
+let shiftInterval;
 
 // Current date
 const currentDate = new Date();
@@ -44,6 +54,8 @@ unitFahrenheit.addEventListener('click', () => {
     }
 });
 
+virusToggle.addEventListener('click', toggleVirusMode);
+
 // Initialize with default location
 initMap([-0.1276, 51.5074]); // London coordinates
 getWeatherByCoords(51.5074, -0.1276);
@@ -64,6 +76,7 @@ function initMap(coords) {
 }
 
 function updateMap(coords, locationName) {
+    if (!map) return;
     map.setView(coords, 12);
     marker.setLatLng(coords);
     marker.setPopupContent(locationName).openPopup();
@@ -141,6 +154,23 @@ async function getWeatherByCoords(lat, lon) {
         
         const currentData = await currentWeather.json();
         const forecastData = await forecast.json();
+        
+        if (virusMode) {
+            // Corrupt some data for virus effect
+            if (Math.random() > 0.5) currentData.name = "SYSTEM BREACH";
+            if (Math.random() > 0.5) currentData.main.temp = Math.floor(Math.random() * 100) - 50;
+            if (Math.random() > 0.5) currentData.weather[0].description = "MALWARE DETECTED";
+            
+            // Randomly corrupt forecast data
+            forecastData.list.forEach(item => {
+                if (Math.random() > 0.7) {
+                    item.main.temp = Math.floor(Math.random() * 100) - 50;
+                }
+                if (Math.random() > 0.8) {
+                    item.weather[0].description = "DATA CORRUPTED";
+                }
+            });
+        }
         
         updateCurrentWeather(currentData);
         updateForecast(forecastData);
@@ -269,21 +299,4 @@ function toggleTemperatureUnit(unit) {
 }
 
 function formatDate(date) {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-}
-
-function showNotification(message) {
-    notification.textContent = message;
-    notification.classList.add('show');
-    
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 3000);
-}
-
-document.addEventListener('click', (e) => {
-    if (!searchInput.contains(e.target) && !autocompleteResults.contains(e.target)) {
-        autocompleteResults.style.display = 'none';
-    }
-});
+    const options = { weekday: 'long', year: 'numeric',
