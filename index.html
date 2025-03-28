@@ -3,60 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project V-2</title>
-    <meta name="description" content="Website is currently under maintenance. Admin only mode. Contact staff.">
+    <title>Global Weather Forecast</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div id="maintenance-mode">
-        <h1>🚧 Website Under Maintenance 🚧</h1>
-        <p>We are currently performing maintenance.</p>
-    </div>
-
-    <noscript>
-        <div>
-            <h1>🚧 Website Under Maintenance 🚧</h1>
-            <p>Admin only mode. Admin login down there.</p>
-        </div>
-    </noscript>
-
-    <div id="main-content" class="scroll-animation">
-        <p>This is the main content of the website.</p>
-        <button class="theme-toggle-btn">Toggle Theme</button>
-        <div class="scroll-animation">
-            <p>This is a scroll animation element</p>
-        </div>
-        <audio id="backgroundMusic" loop autoplay>
-            <source src="your-music-file.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-        <button id="muteButton">Mute</button>
-        <input type="text" id="myInput">
-    </div>
-
-    <div id="help-form-container">
-        <div class="login-container">
-            <button class="login-button" id="loginButton"></button>
-            <div class="login-form" id="loginForm">
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
-                <button>Login</button>
+    <div class="container">
+        <header>
+            <h1>Global Weather Forecast</h1>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Enter city name..." autocomplete="off">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+                <button id="location-btn" title="Use current location"><i class="fas fa-location-arrow"></i></button>
             </div>
-        </div>
-        <h2>Need Help?</h2>
-        <form action="https://formspree.io/f/mqapkojv" method="POST">
-            <label>
-                Your email:
-                <input type="email" name="email">
-            </label>
-            <label>
-                Your message:
-                <textarea name="message"></textarea>
-            </label>
-            <button type="submit">Send</button>
-        </form>
+        </header>
+
+        <main>
+            <div class="weather-display">
+                <div class="current-weather">
+                    <div class="location-date">
+                        <h2 id="location">--</h2>
+                        <p id="date">--</p>
+                    </div>
+                    <div class="weather-main">
+                        <div class="temperature">
+                            <img id="weather-icon" src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather icon">
+                            <div>
+                                <span id="temp">--</span>
+                                <span class="unit-toggle">
+                                    <span class="unit active" id="celsius">°C</span>
+                                    <span class="unit" id="fahrenheit">°F</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="weather-details">
+                            <p id="weather-desc">--</p>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <i class="fas fa-temperature-high"></i>
+                                    <span>Feels like: <span id="feels-like">--</span></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-tint"></i>
+                                    <span>Humidity: <span id="humidity">--</span>%</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-wind"></i>
+                                    <span>Wind: <span id="wind">--</span> km/h</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-compress-alt"></i>
+                                    <span>Pressure: <span id="pressure">--</span> hPa</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forecast">
+                    <h3>5-Day Forecast</h3>
+                    <div class="forecast-container" id="forecast-container">
+                        <!-- Forecast items will be added dynamically -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Data provided by <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a></p>
+            <p>&copy; <span id="current-year"></span> Global Weather Forecast</p>
+        </footer>
     </div>
-    <div style="height: 2000px;"></div>
+
+    <div class="notification" id="notification"></div>
 
     <script src="script.js"></script>
 </body>
