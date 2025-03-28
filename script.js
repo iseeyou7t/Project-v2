@@ -5,10 +5,19 @@ const locationBtn = document.getElementById('location-btn');
 const notification = document.getElementById('notification');
 const unitCelsius = document.getElementById('celsius');
 const unitFahrenheit = document.getElementById('fahrenheit');
+const autocompleteResults = document.getElementById('autocomplete-results');
+const mapContainer = document.querySelector('.map-container');
+const mapElement = document.getElementById('map');
 
 // Weather API Configuration
-const API_KEY = 'YOUR_OPENWEATHERMAP_API_KEY'; // Replace with your actual API key
+const API_KEY = 'YOUR_OPENWEATHERMAP_API_KEY'; // REPLACE THIS
+const GEO_API_KEY = 'YOUR_MAPBOX_API_KEY'; // Get from Mapbox (free tier available)
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+const GEO_API_URL = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
+
+// Initialize map
+let map;
+let marker;
 
 // Current date
 const currentDate = new Date();
@@ -16,21 +25,11 @@ document.getElementById('date').textContent = formatDate(currentDate);
 document.getElementById('current-year').textContent = currentDate.getFullYear();
 
 // Event Listeners
-searchBtn.addEventListener('click', () => {
-    const location = searchInput.value.trim();
-    if (location) {
-        getWeatherData(location);
-    } else {
-        showNotification('Please enter a location');
-    }
-});
-
+searchBtn.addEventListener('click', searchWeather);
 locationBtn.addEventListener('click', getLocationWeather);
-
+searchInput.addEventListener('input', handleAutocomplete);
 searchInput.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') {
-        searchBtn.click();
-    }
+    if (e.key === 'Enter') searchWeather();
 });
 
 unitCelsius.addEventListener('click', () => {
@@ -46,22 +45,91 @@ unitFahrenheit.addEventListener('click', () => {
 });
 
 // Initialize with default location
-getWeatherData('London');
+initMap([-0.1276, 51.5074]); // London coordinates
+getWeatherByCoords(51.5074, -0.1276);
 
 // Functions
-async function getWeatherData(location) {
+function initMap(coords) {
+    if (map) map.remove();
+    
+    map = L.map(mapElement).setView(coords, 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    
+    marker = L.marker(coords).addTo(map)
+        .bindPopup('Loading weather...');
+    
+    mapContainer.style.display = 'block';
+}
+
+function updateMap(coords, locationName) {
+    map.setView(coords, 12);
+    marker.setLatLng(coords);
+    marker.setPopupContent(locationName).openPopup();
+}
+
+async function handleAutocomplete() {
+    const query = searchInput.value.trim();
+    if (query.length < 3) {
+        autocompleteResults.style.display = 'none';
+        return;
+    }
+
     try {
-        // Get coordinates first for more accurate results
-        const geoResponse = await fetch(`${BASE_URL}/weather?q=${location}&appid=${API_KEY}`);
+        const response = await fetch(`${GEO_API_URL}/${encodeURIComponent(query)}.json?access_token=${GEO_API_KEY}&autocomplete=true&types=place`);
+        const data = await response.json();
         
-        if (!geoResponse.ok) {
-            throw new Error('Location not found');
+        if (data.features && data.features.length > 0) {
+            autocompleteResults.innerHTML = '';
+            data.features.forEach(feature => {
+                const item = document.createElement('div');
+                item.className = 'autocomplete-item';
+                item.textContent = feature.place_name;
+                item.addEventListener('click', () => {
+                    searchInput.value = feature.text;
+                    autocompleteResults.style.display = 'none';
+                    const coords = feature.center.reverse(); // [lat, lng]
+                    initMap(coords);
+                    getWeatherByCoords(coords[0], coords[1]);
+                });
+                autocompleteResults.appendChild(item);
+            });
+            autocompleteResults.style.display = 'block';
+        } else {
+            autocompleteResults.style.display = 'none';
         }
-        
-        const geoData = await geoResponse.json();
-        const { lat, lon } = geoData.coord;
-        
-        // Fetch current weather and forecast using coordinates
+    } catch (error) {
+        console.error('Autocomplete error:', error);
+        autocompleteResults.style.display = 'none';
+    }
+}
+
+async function searchWeather() {
+    const location = searchInput.value.trim();
+    if (location) {
+        try {
+            const response = await fetch(`${GEO_API_URL}/${encodeURIComponent(location)}.json?access_token=${GEO_API_KEY}&limit=1`);
+            const data = await response.json();
+            
+            if (data.features && data.features.length > 0) {
+                const coords = data.features[0].center.reverse(); // [lat, lng]
+                initMap(coords);
+                getWeatherByCoords(coords[0], coords[1]);
+            } else {
+                showNotification('Location not found');
+            }
+        } catch (error) {
+            showNotification('Failed to find location');
+            console.error('Search error:', error);
+        }
+    } else {
+        showNotification('Please enter a location');
+    }
+}
+
+async function getWeatherByCoords(lat, lon) {
+    try {
         const [currentWeather, forecast] = await Promise.all([
             fetch(`${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`),
             fetch(`${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
@@ -76,10 +144,12 @@ async function getWeatherData(location) {
         
         updateCurrentWeather(currentData);
         updateForecast(forecastData);
+        searchInput.value = currentData.name;
+        updateMap([lon, lat], `${currentData.name}, ${currentData.sys.country}`);
         
     } catch (error) {
-        console.error('Error fetching weather data:', error);
-        showNotification(error.message || 'Failed to fetch weather data');
+        showNotification('Failed to fetch weather data');
+        console.error('Weather fetch error:', error);
     }
 }
 
@@ -168,7 +238,8 @@ function getLocationWeather() {
         navigator.geolocation.getCurrentPosition(
             position => {
                 const { latitude, longitude } = position.coords;
-                fetchWeatherByCoords(latitude, longitude);
+                initMap([longitude, latitude]);
+                getWeatherByCoords(latitude, longitude);
             },
             error => {
                 console.error('Geolocation error:', error);
@@ -177,30 +248,6 @@ function getLocationWeather() {
         );
     } else {
         showNotification('Geolocation is not supported by your browser');
-    }
-}
-
-async function fetchWeatherByCoords(lat, lon) {
-    try {
-        const [currentWeather, forecast] = await Promise.all([
-            fetch(`${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`),
-            fetch(`${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
-        ]);
-        
-        if (!currentWeather.ok || !forecast.ok) {
-            throw new Error('Weather data not available');
-        }
-        
-        const currentData = await currentWeather.json();
-        const forecastData = await forecast.json();
-        
-        updateCurrentWeather(currentData);
-        updateForecast(forecastData);
-        searchInput.value = '';
-        
-    } catch (error) {
-        console.error('Error fetching weather data:', error);
-        showNotification('Failed to fetch weather data');
     }
 }
 
@@ -216,7 +263,8 @@ function toggleTemperatureUnit(unit) {
     // Refresh displayed temperatures
     const location = document.getElementById('location').textContent;
     if (location !== '--') {
-        getWeatherData(location.split(',')[0].trim());
+        const coords = marker.getLatLng();
+        getWeatherByCoords(coords.lat, coords.lng);
     }
 }
 
@@ -233,3 +281,9 @@ function showNotification(message) {
         notification.classList.remove('show');
     }, 3000);
 }
+
+document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !autocompleteResults.contains(e.target)) {
+        autocompleteResults.style.display = 'none';
+    }
+});
