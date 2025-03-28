@@ -299,4 +299,136 @@ function toggleTemperatureUnit(unit) {
 }
 
 function formatDate(date) {
-    const options = { weekday: 'long', year: 'numeric',
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+
+function showNotification(message) {
+    notification.textContent = message;
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+}
+
+// Virus mode functionality
+const virusMessages = [
+    "Initializing breach sequence...",
+    "Injecting malicious code...",
+    "Bypassing security protocols...",
+    "Accessing mainframe...",
+    "Downloading sensitive data...",
+    "Encrypting files...",
+    "Establishing backdoor...",
+    "Deploying payload...",
+    "System compromised...",
+    "HACK COMPLETE"
+];
+
+function toggleVirusMode() {
+    virusMode = !virusMode;
+    
+    if (virusMode) {
+        // Activate virus mode
+        virusToggle.textContent = "Deactivate Virus Mode";
+        virusToggle.style.background = "#00ff00";
+        virusToggle.style.color = "#000";
+        
+        document.body.classList.add('virus-active');
+        virusOverlay.style.display = 'block';
+        virusMessage.style.display = 'block';
+        
+        startVirusEffects();
+        virusInterval = setInterval(updateVirusMessage, 2000);
+    } else {
+        // Deactivate virus mode
+        virusToggle.textContent = "Activate Virus Mode";
+        virusToggle.style.background = "#ff0000";
+        virusToggle.style.color = "#fff";
+        
+        document.body.classList.remove('virus-active');
+        virusOverlay.style.display = 'none';
+        virusMessage.style.display = 'none';
+        
+        clearInterval(virusInterval);
+        stopVirusEffects();
+        
+        // Refresh weather data to return to normal
+        const coords = marker.getLatLng();
+        getWeatherByCoords(coords.lat, coords.lng);
+    }
+}
+
+function startVirusEffects() {
+    // Add glitch effects to elements
+    const elements = document.querySelectorAll('h1, h2, h3, p, span, div, a, button');
+    elements.forEach(el => {
+        if (el.textContent && el.textContent.trim() !== '') {
+            el.classList.add('glitch');
+            el.setAttribute('data-text', el.textContent);
+        }
+    });
+    
+    // Randomly flicker elements
+    flickerInterval = setInterval(() => {
+        const randomEl = elements[Math.floor(Math.random() * elements.length)];
+        if (randomEl) {
+            randomEl.classList.add('error-flicker');
+            setTimeout(() => randomEl.classList.remove('error-flicker'), 500);
+        }
+    }, 300);
+    
+    // Randomly shift elements
+    shiftInterval = setInterval(() => {
+        const randomEl = document.querySelectorAll('*:not(script):not(style)')[Math.floor(Math.random() * document.querySelectorAll('*:not(script):not(style)').length)];
+        if (randomEl) {
+            randomEl.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`;
+            setTimeout(() => {
+                if (randomEl) randomEl.style.transform = '';
+            }, 200);
+        }
+    }, 500);
+}
+
+function stopVirusEffects() {
+    // Remove all virus effects
+    document.querySelectorAll('.glitch').forEach(el => {
+        el.classList.remove('glitch');
+        el.removeAttribute('data-text');
+    });
+    
+    document.querySelectorAll('.error-flicker').forEach(el => {
+        el.classList.remove('error-flicker');
+    });
+    
+    document.querySelectorAll('*').forEach(el => {
+        el.style.transform = '';
+        el.style.color = '';
+        el.style.fontFamily = '';
+    });
+    
+    clearInterval(flickerInterval);
+    clearInterval(shiftInterval);
+}
+
+function updateVirusMessage() {
+    const randomMessage = virusMessages[Math.floor(Math.random() * virusMessages.length)];
+    virusMessage.textContent = `> ${randomMessage}`;
+    
+    // Random chance to add more effects
+    if (Math.random() > 0.7) {
+        const elements = document.querySelectorAll('*:not(script):not(style)');
+        const randomEl = elements[Math.floor(Math.random() * elements.length)];
+        if (randomEl) {
+            randomEl.style.color = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+            randomEl.style.fontFamily = "'Courier New', monospace";
+        }
+    }
+}
+
+document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !autocompleteResults.contains(e.target)) {
+        autocompleteResults.style.display = 'none';
+    }
+});
