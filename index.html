@@ -1,94 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Weather Forecast</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Advanced Modern Website">
+    <title>Enterprise-Grade Web Application</title>
+    
+    <!-- Critical CSS -->
+    <style>
+        /*! Critical above-fold styles */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --font-base: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        #app-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+    </style>
+    
+    <!-- Preload important resources -->
+    <link rel="preload" href="app.js" as="script">
+    <link rel="preload" href="https://unpkg.com/lodash@4.17.21/core.js" as="script" crossorigin>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Global Weather Forecast</h1>
-            <div class="search-container">
-                <div class="search-wrapper">
-                    <input type="text" id="search-input" placeholder="Enter city name..." autocomplete="off">
-                    <div id="autocomplete-results"></div>
-                </div>
-                <button id="search-btn"><i class="fas fa-search"></i></button>
-                <button id="location-btn" title="Use current location"><i class="fas fa-location-arrow"></i></button>
-            </div>
-        </header>
-
-        <div class="map-container">
-            <div id="map"></div>
-        </div>
-
-        <main>
-            <div class="weather-display">
-                <div class="current-weather">
-                    <div class="location-date">
-                        <h2 id="location">--</h2>
-                        <p id="date">--</p>
-                    </div>
-                    <div class="weather-main">
-                        <div class="temperature">
-                            <img id="weather-icon" src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather icon">
-                            <div>
-                                <span id="temp">--</span>
-                                <span class="unit-toggle">
-                                    <span class="unit active" id="celsius">°C</span>
-                                    <span class="unit" id="fahrenheit">°F</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="weather-details">
-                            <p id="weather-desc">--</p>
-                            <div class="details-grid">
-                                <div class="detail-item">
-                                    <i class="fas fa-temperature-high"></i>
-                                    <span>Feels like: <span id="feels-like">--</span></span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-tint"></i>
-                                    <span>Humidity: <span id="humidity">--</span>%</span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-wind"></i>
-                                    <span>Wind: <span id="wind">--</span> km/h</span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-compress-alt"></i>
-                                    <span>Pressure: <span id="pressure">--</span> hPa</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="forecast">
-                    <h3>5-Day Forecast</h3>
-                    <div class="forecast-container" id="forecast-container">
-                        <!-- Forecast items will be added dynamically -->
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <footer>
-            <p>Data provided by <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a> and <a href="https://www.mapbox.com/" target="_blank">Mapbox</a></p>
-            <p>&copy; <span id="current-year"></span> Global Weather Forecast</p>
-        </footer>
+    <div id="app-loading" aria-live="polite">
+        <div class="loader"></div>
     </div>
 
-    <div class="notification" id="notification"></div>
-    <div id="virus-overlay"></div>
-    <div id="virus-message"></div>
-    <button id="virus-toggle">Activate Virus Mode</button>
+    <!-- Progressive Enhancement -->
+    <noscript>
+        <div class="noscript-warning">
+            <h2>JavaScript Required</h2>
+            <p>This application requires JavaScript to function properly.</p>
+        </div>
+    </noscript>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+    <header class="main-header" role="banner">
+        <nav class="main-nav" aria-label="Main navigation">
+            <ul class="nav-list">
+                <li><a href="/" class="nav-link active" aria-current="page">Home</a></li>
+                <li><a href="/features" class="nav-link">Features</a></li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="content-wrapper" role="main">
+        <section class="hero-section">
+            <h1 class="hero-title">Next-Generation Web Experience</h1>
+            <p class="hero-text">Built with cutting-edge browser technologies</p>
+            <button class="cta-button" id="themeToggle">Toggle Dark Mode</button>
+        </section>
+
+        <section class="dynamic-content" data-lazy-load="true">
+            <!-- Content loaded via JavaScript -->
+        </section>
+    </main>
+
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; 2023 Advanced Web Solutions</p>
+            <ul class="footer-links">
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/terms">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Modern JavaScript with Feature Detection -->
+    <script>
+        // Feature detection layer
+        const supportedFeatures = {
+            es6: (() => {
+                try {
+                    new Function("(a = 0) => a");
+                    return true;
+                } catch(e) { return false; }
+            })(),
+            intersectionObserver: 'IntersectionObserver' in window,
+            fetch: 'fetch' in window
+        };
+
+        if(!supportedFeatures.es6) {
+            document.getElementById('app-loading').innerHTML = 
+                '<p>Please update your browser to use this application.</p>';
+        }
+    </script>
+
+    <!-- Main Application Script -->
+    <script src="app.js" defer></script>
 </body>
 </html>
